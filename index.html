@@ -1,0 +1,156 @@
+<html>
+<head>
+    <title>xml-parser</title>
+    <style>
+        table,
+        th,
+        td {
+            color: white;
+        }
+        tr{
+            text-decoration-color: #CEBD7A;
+        }
+
+        th,
+        td {
+            padding: 10px;
+        }
+        body{
+            background-color:  black;
+
+
+        }
+
+    </style>
+</head>
+<body>
+
+<table>
+    <thead>
+    <tr data-bind="foreach: table_headers1" id="theaders1">
+        <th data-bind="text: $data.tagName" id="tcell1"></th>
+    </tr>
+    </thead>
+    <tbody data-bind="foreach: {data: nodes1, as: 'node1'}" id ="tbody1">
+    <tr data-bind="foreach: {data: node1.children, as:'child1'}" id ="tr1" >
+        <td data-bind="text: child1.textContent" id ="td1"></td>
+    </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+    <tr data-bind="foreach: table_headers2" id ="theaders2">
+        <th data-bind="text: $data.tagName" id="tcell2"></th>
+    </tr>
+    </thead>
+    <tbody data-bind="foreach: {data: nodes2, as: 'node2'}" id="tbody2">
+    <tr data-bind="foreach: {data: node2.children, as:'child2'}" id="tr2">
+        <td data-bind="text: child2.textContent" id="td2"></td>
+    </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+    <tr data-bind="foreach: table_headers3" id="theaders3">
+        <th data-bind="text: $data.tagName" id="tcell3"></th>
+    </tr>
+    </thead>
+    <tbody data-bind="foreach: {data: nodes3, as: 'node3'}" id="tbody3">
+    <tr data-bind="foreach: {data: node3.children, as:'child3'}" id="tr3">
+        <td data-bind="text: child3.textContent" id="td3"></td>
+    </tr>
+    </tbody>
+</table>
+
+<button onclick="getALABAMA()">Get ALABAMA</button>
+<button onclick="getPENNST()">Get PENN STATE</button>
+<button onclick="getSTANFORD()">Get STANFORD</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+<script type="text/javascript">
+
+
+    function getALABAMA() {
+        var request = new XMLHttpRequest();
+        request.open("GET", "ALABAMA.xml", false);
+        request.send();
+        var xml1 = request.responseXML;
+
+        var nodes1 = xml1.getElementsByTagName("PLAY");
+        var table_headers1 = nodes1[0].children;
+
+        ko.applyBindings({
+            table_headers1: table_headers1,
+            nodes1: nodes1
+        });
+
+        cleanBindings();
+
+    }
+
+    function getPENNST() {
+        var request = new XMLHttpRequest();
+        request.open("GET", "PENNST.xml", false);
+        request.send();
+        var xml2 = request.responseXML;
+
+        var nodes2 = xml2.getElementsByTagName("PLAY");
+        var table_headers2 = nodes2[0].children;
+
+        ko.applyBindings({
+            table_headers2: table_headers2,
+            nodes2: nodes2
+        });
+        cleanBindings();
+    }
+
+    function getSTANFORD() {
+        var request = new XMLHttpRequest();
+        request.open("GET", "STANFORD.xml", false);
+        request.send();
+        var xml3 = request.responseXML;
+
+        var nodes3 = xml3.getElementsByTagName("PLAY");
+        var table_headers3 = nodes3[0].children;
+
+        ko.applyBindings({
+            table_headers3: table_headers3,
+            nodes3: nodes3
+        });
+        cleanBindings();
+    }
+
+    function cleanBindings() {
+        ko.cleanNode(document.getElementById("theaders1"));
+        ko.cleanNode(document.getElementById("tcell1"));
+        ko.cleanNode(document.getElementById("tbody1"));
+        ko.cleanNode(document.getElementById("tr1"));
+        ko.cleanNode(document.getElementById("td1"));
+
+        ko.cleanNode(document.getElementById("theaders2"));
+        ko.cleanNode(document.getElementById("tcell2"));
+        ko.cleanNode(document.getElementById("tbody2"));
+        ko.cleanNode(document.getElementById("tr2"));
+        ko.cleanNode(document.getElementById("td2"));
+
+        ko.cleanNode(document.getElementById("theaders3"));
+        ko.cleanNode(document.getElementById("tcell3"));
+        ko.cleanNode(document.getElementById("tbody3"));
+        ko.cleanNode(document.getElementById("tr3"));
+        ko.cleanNode(document.getElementById("td3"));
+
+    }
+
+    // construct table header using table_headers
+    // loop through the node to populate data into table
+    // way knockoutjs bind data for every data point if you create 2 way binding when we are handling relativle large file, just updating webpage observeredArray is
+    // very time consuming and often frezzes the webpage. There for my soltion is to create seprate
+</script>
+</body>
+</html>
+
+
+
+
