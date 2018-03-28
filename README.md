@@ -1,3 +1,10 @@
+## Project instructions
+
+
+- Run a local host
+- Launch index.html
+
+
 ## Project Overview
 
 - The XML Parser can be written in any programming language of your choice
@@ -52,9 +59,3 @@ https://dvsmedia.blob.core.windows.net/interviews/STANFORD.xml
 
 ## Build/Deploy Instructions
 - Please fill out any special instructions to build/deploy your solution here
->>>>>>> first commit
-## Project instructions
-
-
-- Run a local host
-- Launch index.html
